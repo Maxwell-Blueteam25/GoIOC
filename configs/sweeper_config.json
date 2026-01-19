@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "case_id": "INC-Generated",
+    "generated_by": "maxwe",
+    "generated_at": "2026-01-16 15:56:34",
+    "ioc_count": 3
+  },
+  "sweeps": [
+    {
+      "type": "file_name",
+      "value": "UnRAR.exe",
+      "action": "report",
+      "constraints": {
+        "path": "C:\\Program Files\\WinRAR\\"
+      },
+      "comment": "Found on Patient Zero"
+    },
+    {
+      "type": "file_hash",
+      "value": "8F6C28C6F4EF09A335123AF11DFD7A45FFDEC661ACDEF2C151E871A7E060E71E",
+      "action": "report",
+      "constraints": {
+        "path": "C:\\Users\\",
+        "extension": ".ine"
+      },
+      "comment": "Malicious Payload Hash"
+    },
+    {
+      "type": "process_name",
+      "value": "svchost.exe",
+      "action": "report",
+      "comment": "Check for suspicious path execution"
+    }
+  ]
+}

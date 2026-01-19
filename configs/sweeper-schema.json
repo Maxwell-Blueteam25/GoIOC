@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bluewave Sweeper Configuration",
+  "description": "Validation schema for Bluewave Sweeper IOC files",
+  "type": "object",
+  "required": [ "sweeps" ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Metadata regarding the investigation or campaign",
+      "properties": {
+        "case_id": { "type": "string" },
+        "generated_by": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "ioc_count": { "type": "integer" }
+      }
+    },
+    "sweeps": {
+      "type": "array",
+      "description": "List of indicators to search for",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [ "type", "value" ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file_name",
+              "file_hash",
+              "registry_key",
+              "registry_value",
+              "process_name",
+              "service_name"
+            ],
+            "description": "The category of the indicator"
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The specific indicator string (Hash, Path, Name)"
+          },
+          "action": {
+            "type": "string",
+            "default": "report",
+            "description": "Action to take on match (report is standard)"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Context for the analyst"
+          },
+          "constraints": {
+            "type": "object",
+            "description": "Optimization limits to speed up scanning",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Specific directory to search"
+              },
+              "extension": {
+                "type": "string",
+                "description": "File extension filter (e.g., .exe)"
+              },
+              "recursive": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
